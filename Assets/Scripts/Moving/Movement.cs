@@ -9,14 +9,14 @@ public class Movement : MonoBehaviour
     #region Параметры
     [SerializeField] private float _moveDeadzone = 0.15f;
     [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] private float _inAirSpeedMult = 0.8f;
     [SerializeField] private float _groundCheckDistance;
     #endregion
     #region Внутрение параметры
     private bool _canMove = true;
     private bool _isGrounded;
     private bool _isDirectionRight = true;
-    private Rigidbody2D _rb;
-    private Vector2 _direction = Vector2.zero;
+    private Rigidbody2D _rb;    
     #endregion
     #region Ссылки
     [SerializeField] private SpriteRenderer _playerRender;
@@ -61,8 +61,15 @@ public class Movement : MonoBehaviour
         }
 
         _playerRender.flipX = !_isDirectionRight;
-        _direction = transform.position;
-        _direction.x += direction * _moveSpeed * Time.fixedDeltaTime;
-        _rb.MovePosition(_direction);
+        Vector2 dir;
+        if(_isGrounded)
+        {
+            dir = new Vector2(direction * _moveSpeed, _rb.velocity.y);
+        }
+        else
+        {
+            dir = new Vector2(direction * _moveSpeed*_inAirSpeedMult, _rb.velocity.y);
+        }
+        _rb.velocity = dir;
     }
 }
