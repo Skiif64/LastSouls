@@ -42,11 +42,12 @@ public class PlayerInput : MonoBehaviour
         #endregion
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Math.Abs(_move.ReadValue<float>()) > _moveDeadzone)
         {
-            Debug.Log(_move.ReadValue<float>());
+            float direction = _move.ReadValue<float>();            
+            _playerMoving.Move(direction);
         }
     }
 
