@@ -12,9 +12,8 @@ public class PlayerInput : MonoBehaviour
     private InputAction _jump;
     private InputAction _lightAttack;
     private InputAction _heavyAttack;
-    #endregion
-    [SerializeField] private float _moveDeadzone = 0.15f;
-    [SerializeField] private Movement _playerMoving;    
+    #endregion    
+    [SerializeField] private Movement _playerMoving;
     private void OnEnable()
     {
         #region Инициализация ввода
@@ -44,11 +43,8 @@ public class PlayerInput : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Math.Abs(_move.ReadValue<float>()) > _moveDeadzone)
-        {
-            float direction = _move.ReadValue<float>();            
-            _playerMoving.Move(direction);
-        }
+        float direction = _move.ReadValue<float>();
+        _playerMoving.Move(direction);
     }
 
     private void TryHeavyAttack(InputAction.CallbackContext obj)
