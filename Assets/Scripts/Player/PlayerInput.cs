@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
     private InputAction _heavyAttack;
     #endregion
     [SerializeField] private float _moveDeadzone = 0.15f;
-    [SerializeField] private Movement _playerMoving;
+    [SerializeField] private Movement _playerMoving;    
     private void OnEnable()
     {
         #region Инициализация ввода

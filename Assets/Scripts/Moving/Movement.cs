@@ -10,9 +10,11 @@ public class Movement : MonoBehaviour
     private bool _canMove = true;
     private Rigidbody2D _rb;
     private Vector2 _direction =Vector2.zero;
+    [SerializeField] private SpriteRenderer _playerRender;
+    private bool _isDirectionRight = true;
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();        
     }
     public void Move(float direction)
     {
@@ -20,6 +22,15 @@ public class Movement : MonoBehaviour
         {
             return;
         }
+        if(direction>0)
+        {
+            _isDirectionRight = true;           
+        }
+        else
+        {
+            _isDirectionRight = false;           
+        }
+        _playerRender.flipX = !_isDirectionRight;
         _direction.x = direction * _moveSpeed * Time.fixedDeltaTime;
         _rb.MovePosition((Vector2)transform.position + _direction);
     }
