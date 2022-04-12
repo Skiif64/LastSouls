@@ -49,6 +49,14 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8744609-db8d-4de7-81fd-6ae1150fb4a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -161,6 +169,28 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""action"": ""AttackHeavy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09883099-bdd0-475b-b44e-815f1aa0fba8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70fbb270-922e-4dc7-bc96-b2e9a30474c3"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -212,6 +242,7 @@ public class @MainInput : IInputActionCollection, IDisposable
         m_General_Jump = m_General.FindAction("Jump", throwIfNotFound: true);
         m_General_AttackLight = m_General.FindAction("AttackLight", throwIfNotFound: true);
         m_General_AttackHeavy = m_General.FindAction("AttackHeavy", throwIfNotFound: true);
+        m_General_Roll = m_General.FindAction("Roll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -265,6 +296,7 @@ public class @MainInput : IInputActionCollection, IDisposable
     private readonly InputAction m_General_Jump;
     private readonly InputAction m_General_AttackLight;
     private readonly InputAction m_General_AttackHeavy;
+    private readonly InputAction m_General_Roll;
     public struct GeneralActions
     {
         private @MainInput m_Wrapper;
@@ -273,6 +305,7 @@ public class @MainInput : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_General_Jump;
         public InputAction @AttackLight => m_Wrapper.m_General_AttackLight;
         public InputAction @AttackHeavy => m_Wrapper.m_General_AttackHeavy;
+        public InputAction @Roll => m_Wrapper.m_General_Roll;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -294,6 +327,9 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @AttackHeavy.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAttackHeavy;
                 @AttackHeavy.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAttackHeavy;
                 @AttackHeavy.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAttackHeavy;
+                @Roll.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnRoll;
             }
             m_Wrapper.m_GeneralActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,6 +346,9 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @AttackHeavy.started += instance.OnAttackHeavy;
                 @AttackHeavy.performed += instance.OnAttackHeavy;
                 @AttackHeavy.canceled += instance.OnAttackHeavy;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
         }
     }
@@ -347,5 +386,6 @@ public class @MainInput : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttackLight(InputAction.CallbackContext context);
         void OnAttackHeavy(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
     }
 }

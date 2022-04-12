@@ -12,9 +12,11 @@ public class PlayerInput : MonoBehaviour
     private InputAction _jumpAction;
     private InputAction _lightAttackAction;
     private InputAction _heavyAttackAction;
+    private InputAction _rollAction;
     #endregion    
     [SerializeField] private Movement _playerMoving;
     [SerializeField] private Jump _jump;
+    [SerializeField] private Roll _roll;
 
     private float _direction = 0;
     private void OnEnable()
@@ -25,6 +27,7 @@ public class PlayerInput : MonoBehaviour
         _jumpAction = _input.General.Jump;
         _lightAttackAction = _input.General.AttackLight;
         _heavyAttackAction = _input.General.AttackHeavy;
+        _rollAction = _input.General.Roll;
         #endregion
 
         #region Привязка действий
@@ -32,8 +35,10 @@ public class PlayerInput : MonoBehaviour
         _jumpAction.performed += TryJump;
         _lightAttackAction.performed += TryLightAttack;
         _heavyAttackAction.performed += TryHeavyAttack;
+        _rollAction.performed += TryRoll;
         #endregion
-    }
+    }    
+
     private void OnDisable()
     {
         #region Отвязка действий
@@ -41,7 +46,13 @@ public class PlayerInput : MonoBehaviour
         _jumpAction.performed -= TryJump;
         _lightAttackAction.performed -= TryLightAttack;
         _heavyAttackAction.performed -= TryHeavyAttack;
+        _rollAction.performed -= TryRoll;
         #endregion
+    }
+
+    private void TryRoll(InputAction.CallbackContext obj)
+    {
+        _roll.TryRoll(_direction);
     }
 
     private void FixedUpdate()
