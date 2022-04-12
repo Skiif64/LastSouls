@@ -12,8 +12,9 @@ public class PlayerInput : MonoBehaviour
     private InputAction _jump;
     private InputAction _lightAttack;
     private InputAction _heavyAttack;
-    [SerializeField] private float _inputSensevity = 0.15f;
     #endregion
+    [SerializeField] private float _moveDeadzone = 0.15f;
+    [SerializeField] private Movement _playerMoving;
     private void OnEnable()
     {
         #region Инициализация ввода
@@ -43,7 +44,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (_move.ReadValue<float>() > 0.15f)
+        if (Math.Abs(_move.ReadValue<float>()) > _moveDeadzone)
         {
             Debug.Log(_move.ReadValue<float>());
         }
