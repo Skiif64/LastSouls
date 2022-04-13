@@ -1,6 +1,6 @@
 public interface IHealable
 {
-    public float Health { get; }
+    public float CurrentHealth { get; }
 
     public void TakeHeal(float value);
 }

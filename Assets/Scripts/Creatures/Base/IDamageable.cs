@@ -1,7 +1,7 @@
 
 public interface IDamageable
 {
-    public float Health { get;}
+    public float CurrentHealth { get;}
 
     public void TakeDamage(DamageInfo damage);
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MeleeWeapon : WeaponBase
+public class MeleeWeapon : Weapon
 {
     public override void Attack(Collider2D target)
     {
