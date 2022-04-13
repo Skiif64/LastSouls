@@ -23,7 +23,7 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""deb4b06c-c9cf-4d1f-b7fe-297cf7031b5a"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone"",
                     ""interactions"": """"
                 },
                 {

@@ -133,10 +133,11 @@ GameObject:
   m_Component:
   - component: {fileID: 319193156}
   - component: {fileID: 319193155}
+  - component: {fileID: 319193159}
   - component: {fileID: 319193157}
   - component: {fileID: 319193158}
   - component: {fileID: 319193160}
-  - component: {fileID: 319193159}
+  - component: {fileID: 319193161}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -153,7 +154,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 319193154}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 671e5f15501d39247b16c3c456ada918, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMoving: {fileID: 319193158}
   _jump: {fileID: 319193160}
+  _roll: {fileID: 319193161}
 --- !u!114 &319193158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbbdf055956e5a43be46b09f24f30a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveDeadzone: 0.15
   _moveSpeed: 8
   _inAirSpeedMult: 0.8
   _groundCheckDistance: 0
@@ -231,7 +232,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3
+  m_LinearDrag: 0.25
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -251,7 +252,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd05ba5b615afa4192e67cf1f0ddef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 500
+  _jumpForce: 300
+  _animator: {fileID: 1010621296}
+--- !u!114 &319193161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319193154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276cc8e52f14c534da2dff217490b01b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rollMult: 200
+  _animator: {fileID: 1010621296}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d56cff2a740fb45865bdbf49d875f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalOffset: 1
+  _verticalOffset: 0.75
   _horizontalBounds: 2
   _verticalBounds: 1
   _speed: 10

@@ -73,7 +73,7 @@ public class PlayerInput : MonoBehaviour
 
     private void TryJump(InputAction.CallbackContext obj)
     {
-        _jump.TryJump(_direction);
+        _jump.TryJump();
     }
 
 

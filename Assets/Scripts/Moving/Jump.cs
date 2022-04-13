@@ -9,7 +9,7 @@ public class Jump : MonoBehaviour
     private bool _inAirJump;
     private Rigidbody2D _rb;
     private Movement _movement;
-
+    [SerializeField] private Animator _animator;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -21,23 +21,22 @@ public class Jump : MonoBehaviour
         if (_movement.IsGrounded) _inAirJump = true;
     }
 
-    public void TryJump(float direction)
+    public void TryJump()
     {
         if (_movement.IsGrounded)
         {
-            DoJump(direction);
+            DoJump();
         }
         else if(_inAirJump)
         {
-            DoJump(direction);
+            DoJump();
             _inAirJump = false;
         }
     }
 
-    private void DoJump(float direction)
+    private void DoJump()
     {
-        Vector2 vec = Vector2.up;
-        vec.x += direction;
-        _rb.AddForce(vec.normalized * _jumpForce);
+        _animator.SetTrigger("jump");
+        _rb.AddForce(Vector2.up * _jumpForce);
     }
 }

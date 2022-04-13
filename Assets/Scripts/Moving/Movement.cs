@@ -6,8 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
-    #region Параметры
-    [SerializeField] private float _moveDeadzone = 0.15f;
+    #region Параметры    
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _inAirSpeedMult = 0.8f;
     [SerializeField] private float _groundCheckDistance;
@@ -24,6 +23,7 @@ public class Movement : MonoBehaviour
     #endregion
 
     public bool IsGrounded => _isGrounded;
+    public float MoveSpeed => _moveSpeed;
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
             return;
         }
         _animator.SetFloat("Horizontal", Mathf.Abs(direction));
-        if (Mathf.Abs(direction) < _moveDeadzone) return;
+        if (Mathf.Abs(direction) < 0.01) return;
         if (direction > 0)
         {
             _isDirectionRight = true;
