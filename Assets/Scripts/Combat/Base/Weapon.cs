@@ -5,16 +5,18 @@ using UnityEngine;
 /// <summary>
 /// Базовый класс оружия
 /// </summary>
-public abstract class Weapon : MonoBehaviour
+[System.Serializable]
+public abstract class Weapon
 {
     [SerializeField]
     protected float _damage;
     [SerializeField]
     protected DamageType _type;
 
-    public virtual void SetWeapon()
+    public virtual void SetWeapon(float damage, DamageType type)
     {
-
+        _damage = damage;
+        _type = type;
     }
 
     public abstract void Attack(Collider2D target);
