@@ -33,7 +33,10 @@ public class AnimatorStateController : MonoBehaviour
                 break;
             case State.Rolling:
                 _animator.SetTrigger("Roll");
-                break;            
+                break;
+            case State.Attacking:
+                _animator.SetTrigger("Attack");
+                break;
         }
     }
 

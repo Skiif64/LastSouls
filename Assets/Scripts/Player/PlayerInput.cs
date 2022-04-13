@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private Movement _playerMoving;
     [SerializeField] private Jump _jump;
     [SerializeField] private Roll _roll;
+    [SerializeField] private Combat _combat;
 
     private float _direction = 0;
     private void OnEnable()
@@ -68,7 +69,7 @@ public class PlayerInput : MonoBehaviour
 
     private void TryLightAttack(InputAction.CallbackContext obj)
     {
-        Debug.Log("Light Attack");
+        _combat.TryLightAttack();
     }
 
     private void TryJump(InputAction.CallbackContext obj)
