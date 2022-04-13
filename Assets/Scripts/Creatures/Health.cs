@@ -17,6 +17,10 @@ public abstract class Health : IHealable, IDamageable
         _maxHealth = maxHealth;
         _isDead = false;
     }
+    /// <summary>
+    /// Получить урон
+    /// </summary>
+    /// <param name="damage">Информация об уроне</param>
     public virtual void TakeDamage(DamageInfo damage)
     {
         if (damage.Value < 0) throw new ArgumentException("Damage value below 0",nameof(damage.Value));
@@ -28,7 +32,10 @@ public abstract class Health : IHealable, IDamageable
         }
         CheckDead();
     }
-
+    /// <summary>
+    /// Получить решение
+    /// </summary>
+    /// <param name="value">Величина</param>
     public virtual void TakeHeal(float value)
     {
         if (value < 0) throw new ArgumentException("Heal value below 0", nameof(value));

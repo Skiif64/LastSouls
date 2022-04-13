@@ -1,3 +1,6 @@
+/// <summary>
+/// Информация об уроне
+/// </summary>
 public struct DamageInfo
 {
     public readonly object Sender;
