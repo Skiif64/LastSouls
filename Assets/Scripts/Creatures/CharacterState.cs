@@ -11,6 +11,8 @@ public enum State
     InAir,
     Rolling,
     Attacking,
+    Blocking,
+    Frozen,
     Dead
 }
 /// <summary>

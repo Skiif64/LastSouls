@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public class MeleeWeapon : Weapon
 {
     public override void Attack(Collider2D target)

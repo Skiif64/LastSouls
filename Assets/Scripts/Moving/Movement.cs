@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D),typeof(CharacterState))]
 public class Movement : MonoBehaviour
 {
     #region ѕараметры    
@@ -15,7 +15,8 @@ public class Movement : MonoBehaviour
     private bool _canMove = true;
     private bool _isGrounded;
     private bool _isDirectionRight = true;
-    private Rigidbody2D _rb;    
+    private Rigidbody2D _rb;
+    private CharacterState _state;
     #endregion
     #region —сылки
     [SerializeField] private SpriteRenderer _playerRender;
@@ -28,6 +29,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _state = GetComponent<CharacterState>();
     }
 
     private void FixedUpdate()
@@ -35,12 +37,14 @@ public class Movement : MonoBehaviour
         _isGrounded = CheckGround();
     }
 
-    public bool CheckGround()
+    private bool CheckGround()
     {
         if (Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance))
         {
+            _state.ChangeState(State.Still);
             return true;
         }
+        _state.ChangeState(State.InAir);
         return false;
     }
     public void Move(float direction)
