@@ -8,7 +8,7 @@ public class Creature : MonoBehaviour, IDamageable
     [SerializeField] private Health _health;
     public float CurrentHealth => _health.CurrentHealth;
 
-    public event EventHandler<float> Damaged;
+    public event EventHandler<float> HealthChanged;
 
 
     private void Awake()
@@ -19,6 +19,6 @@ public class Creature : MonoBehaviour, IDamageable
     {
         _health.TakeDamage(damage);
         Debug.Log($"{transform.name} takes {damage.Value} {damage.Type.Name} from {damage.Sender}");
-        Damaged?.Invoke(this, CurrentHealth);
+        HealthChanged?.Invoke(this, CurrentHealth);
     }
 }
