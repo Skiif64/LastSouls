@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 319193158}
   - component: {fileID: 319193160}
   - component: {fileID: 319193161}
+  - component: {fileID: 319193164}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -204,6 +205,7 @@ MonoBehaviour:
   _playerMoving: {fileID: 319193158}
   _jump: {fileID: 319193160}
   _roll: {fileID: 319193161}
+  _combat: {fileID: 319193164}
 --- !u!114 &319193158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +297,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1010621296}
+--- !u!114 &319193164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319193154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb96b57a0725d314a991ec4e4d465d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blade: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +423,7 @@ GameObject:
   - component: {fileID: 1010621294}
   - component: {fileID: 1010621295}
   - component: {fileID: 1010621296}
+  - component: {fileID: 1010621297}
   m_Layer: 0
   m_Name: HeroKnight_0
   m_TagString: Untagged
@@ -499,6 +515,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1010621297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010621293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906e1c75678fe164b9402f7cf914e2fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _combat: {fileID: 319193164}
 --- !u!1 &1392663660
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,13 +13,12 @@ public class Movement : MonoBehaviour
     #endregion
     #region ¬нутрение параметры
     private bool _canMove = true;
-    private bool _isGrounded;
-    private bool _isDirectionRight = true;
+    private bool _isGrounded;    
     private Rigidbody2D _rb;
     private CharacterState _state;
     #endregion
     #region —сылки
-    [SerializeField] private SpriteRenderer _playerRender;
+    
     [SerializeField] private Animator _animator;
     #endregion
 
@@ -57,14 +56,14 @@ public class Movement : MonoBehaviour
         if (Mathf.Abs(direction) < 0.01) return;
         if (direction > 0)
         {
-            _isDirectionRight = true;
+            _state.ChangeFacing(Facing.Right);
         }
         else
         {
-            _isDirectionRight = false;
+            _state.ChangeFacing(Facing.Left);
         }
 
-        _playerRender.flipX = !_isDirectionRight;
+        
         Vector2 dir;
         if(_isGrounded)
         {

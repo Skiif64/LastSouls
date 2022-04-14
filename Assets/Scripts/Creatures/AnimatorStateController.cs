@@ -7,6 +7,7 @@ using UnityEngine;
 public class AnimatorStateController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _playerRender;
     private CharacterState _state;
     private void Awake()
     {
@@ -14,15 +15,19 @@ public class AnimatorStateController : MonoBehaviour
     }
     private void OnEnable()
     {
-        _state.Changed += Execute;
+        _state.StateChanged += ExecuteState;
+        _state.FacingChanged += ExecuteFacing;
     }
+
+    
 
     private void OnDisable()
     {
-        _state.Changed -= Execute;
+        _state.StateChanged -= ExecuteState;
+        _state.FacingChanged -= ExecuteFacing;
     }
 
-    private void Execute(object sender, State e)
+    private void ExecuteState(object sender, State e)
     {
         switch(e)
         {
@@ -38,6 +43,11 @@ public class AnimatorStateController : MonoBehaviour
                 _animator.SetTrigger("Attack");
                 break;
         }
+    }
+
+    private void ExecuteFacing(object sender, Facing e)
+    {
+        _playerRender.flipX = e == Facing.Left ? true : false;
     }
 
     

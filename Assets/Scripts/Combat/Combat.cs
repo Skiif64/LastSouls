@@ -6,7 +6,9 @@ using UnityEngine;
 public class Combat : MonoBehaviour
 {
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private Collider2D _blade;
+    [SerializeField] private float _distance;
+    [SerializeField] private float _hOffset;
+    [SerializeField] private float _vOffset;
     private CharacterState _state;
     private bool _canAttack=true;
     private bool _hitActive;
@@ -36,12 +38,16 @@ public class Combat : MonoBehaviour
     {
         _state.ChangeState(State.Attacking);
         _canAttack = false;
-        var hit = Physics2D.BoxCast(new Vector2(transform.position.x-1.5f,transform.position.y),new Vector2(0.5f,0.01f),0,Vector2.up);
+        var hit = Physics2D.Raycast((Vector2)transform.position + new Vector2(_hOffset * (float)_state.Facing, _vOffset), Vector2.right * (float)_state.Facing, _distance);
         if(hit)
-        {
+        {            
             _weapon.Attack(hit.collider);
         }
     }
 
-    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay((Vector2)transform.position + new Vector2(_hOffset * (float)_state.Facing, _vOffset), new Vector2(_distance, 0) * (float)_state.Facing);
+    }
 }

@@ -11,6 +11,7 @@ public abstract class Health : IHealable, IDamageable
     public float MaxHealth => _maxHealth;
     public bool IsDead => _isDead;
 
+    public event EventHandler Dying;
     public Health(float health, float maxHealth)
     {
         _currHealth = health;
@@ -51,6 +52,7 @@ public abstract class Health : IHealable, IDamageable
         if(_currHealth<=0)
         {
             _isDead = true;
+            Dying?.Invoke(this, null);
         }
     }
 }
