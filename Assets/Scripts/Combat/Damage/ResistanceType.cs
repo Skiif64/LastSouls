@@ -7,5 +7,18 @@ public class ResistanceType : ScriptableObject
     [SerializeField] private Sprite _icon;
     public string Name => _name;
     public Sprite Icon => _icon;
-    
+
+    public override bool Equals(object other)
+    {
+        if(other is ResistanceType type)
+        {
+            return _name == type.Name;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }

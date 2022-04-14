@@ -8,9 +8,11 @@ public class Character : MonoBehaviour, IDamageable
 {
     #region Для теста
     [SerializeField] private float _maxHealth; //To remove
+    [SerializeField] private ResistanceSheet _resistanceSheet;
     #endregion
     #region Внутрение параметры
     private Health _health;
+    private ResistanceSheetProvider _resistance;
     private bool _canTakeDamage = true;
     //TODO: Stats
     //TODO: Resistance
@@ -23,6 +25,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         #region Инициализация внутренних компонентов
         _health = new Health(_maxHealth);
+        _resistance = new ResistanceSheetProvider(_resistanceSheet);
         #endregion
         #region Получение компонентов
         _state = GetComponent<CharacterState>();
@@ -38,10 +41,19 @@ public class Character : MonoBehaviour, IDamageable
     public void TakeDamage(DamageInfo damage)
     {
         if (!_canTakeDamage) return;
-        //TODO: Просчет сопротивлений
-        _health.TakeDamage(damage);
+        #region Просчет сопротивлений
+        var resist = _resistance.GetResistanceValue(damage.Type.ResistanceType);
+        var damageToApply = new DamageInfo
+            (
+            damage.Sender,
+            damage.Value * (1 - resist/100f),
+            damage.Type
+            );        
+        #endregion
+
+        _health.TakeDamage(damageToApply);
         HealthChanged?.Invoke(this, CurrentHealth);
-        Debug.Log($"{transform.name} takes {damage.Value} {damage.Type.Name} from {damage.Sender}");
+        Debug.Log($"{transform.name} takes {damageToApply.Value}({damageToApply.Value - damage.Value}) {damage.Type.Name} from {damage.Sender}");
     }
 
     private void OnDeath(object sender, EventArgs e)
