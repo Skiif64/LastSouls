@@ -5,22 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterState))]
 public class Combat : MonoBehaviour
 {
+    #region Тестовые данные
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private DamageType _type;
     [SerializeField] private float _distance;
+    #endregion
+
+    #region Настройки
     [SerializeField] private float _hOffset;
     [SerializeField] private float _vOffset;
+    #endregion
 
-    [SerializeField] private DamageType _type;
+    #region Внутренние данные
     private CharacterState _state;
     private bool _canAttack=true;
     private bool _hitActive;
+    #endregion
 
     private void Awake()
     {
+        #region Получение компонентов
         _state = GetComponent<CharacterState>();
-
+        #endregion
+        #region Инициализация компонентов
         _weapon = new MeleeWeapon();
         _weapon.SetWeapon(10, _type);
+        #endregion
     }
 
     public void TryLightAttack()
@@ -47,6 +57,9 @@ public class Combat : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Для теста
+    /// </summary>
     private void OnDrawGizmos()
     {
         var dir = 1f;

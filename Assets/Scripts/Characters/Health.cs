@@ -5,26 +5,22 @@ using UnityEngine;
 public class Health
 {    
     private float _currHealth;    
-    private float _maxHealth;
-    private bool _canTakeDamage;
+    private float _maxHealth;    
     public float CurrentHealth => _currHealth;
-    public float MaxHealth => _maxHealth;
-    public bool IsDead => _canTakeDamage;
+    public float MaxHealth => _maxHealth;    
 
     public event EventHandler Dying;
     public Health(float maxHealth)
     {
         _currHealth = maxHealth;
-        _maxHealth = maxHealth;
-        _canTakeDamage = true;
+        _maxHealth = maxHealth;        
     }
     /// <summary>
     /// Получить урон
     /// </summary>
     /// <param name="damage">Информация об уроне</param>
     public void TakeDamage(DamageInfo damage)
-    {
-        if (!_canTakeDamage) return;
+    {        
         if (damage.Value < 0) throw new ArgumentException("Damage value below 0",nameof(damage.Value));
         _currHealth -= damage.Value;
         if(_currHealth<0)
@@ -43,15 +39,20 @@ public class Health
         _currHealth += value;
         if(_currHealth>_maxHealth)
         {
-            _currHealth = _maxHealth;
+            _currHealth = _maxHealth;           
         }
+    }
+
+    public void UpdateMaxHealth(float newValue)
+    {
+        if (_maxHealth == newValue) return;
+        if (newValue <= 0) throw new ArgumentException("Max health c",nameof(newValue));
     }
 
     private void CheckDead()
     {
         if(_currHealth<=0)
-        {
-            _canTakeDamage = false;
+        {            
             Dying?.Invoke(this, null);
         }
     }
