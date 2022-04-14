@@ -9,6 +9,8 @@ public class Combat : MonoBehaviour
     [SerializeField] private float _distance;
     [SerializeField] private float _hOffset;
     [SerializeField] private float _vOffset;
+
+    [SerializeField] private DamageType _type;
     private CharacterState _state;
     private bool _canAttack=true;
     private bool _hitActive;
@@ -18,7 +20,7 @@ public class Combat : MonoBehaviour
         _state = GetComponent<CharacterState>();
 
         _weapon = new MeleeWeapon();
-        _weapon.SetWeapon(10, null);
+        _weapon.SetWeapon(10, _type);
     }
 
     public void TryLightAttack()
@@ -47,7 +49,10 @@ public class Combat : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        var dir = 1f;
+        if(_state!=null)
+        dir = (float)_state.Facing;
         Gizmos.color = Color.green;
-        Gizmos.DrawRay((Vector2)transform.position + new Vector2(_hOffset * (float)_state.Facing, _vOffset), new Vector2(_distance, 0) * (float)_state.Facing);
+        Gizmos.DrawRay((Vector2)transform.position + new Vector2(_hOffset * dir, _vOffset), new Vector2(_distance, 0) * dir);
     }
 }

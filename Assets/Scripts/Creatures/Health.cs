@@ -2,19 +2,21 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public abstract class Health : IHealable, IDamageable
-{    
-    protected float _currHealth;    
-    protected float _maxHealth;
-    protected bool _isDead;
+public class Health : IHealable, IDamageable
+{
+    [SerializeField]
+    private float _currHealth;
+    [SerializeField]
+    private float _maxHealth;
+    private bool _isDead;
     public float CurrentHealth => _currHealth;
     public float MaxHealth => _maxHealth;
     public bool IsDead => _isDead;
 
     public event EventHandler Dying;
-    public Health(float health, float maxHealth)
+    public Health(float maxHealth)
     {
-        _currHealth = health;
+        _currHealth = maxHealth;
         _maxHealth = maxHealth;
         _isDead = false;
     }
@@ -22,7 +24,7 @@ public abstract class Health : IHealable, IDamageable
     /// Получить урон
     /// </summary>
     /// <param name="damage">Информация об уроне</param>
-    public virtual void TakeDamage(DamageInfo damage)
+    public void TakeDamage(DamageInfo damage)
     {
         if (damage.Value < 0) throw new ArgumentException("Damage value below 0",nameof(damage.Value));
 
@@ -37,7 +39,7 @@ public abstract class Health : IHealable, IDamageable
     /// Получить решение
     /// </summary>
     /// <param name="value">Величина</param>
-    public virtual void TakeHeal(float value)
+    public void TakeHeal(float value)
     {
         if (value < 0) throw new ArgumentException("Heal value below 0", nameof(value));
         _currHealth += value;
@@ -47,7 +49,7 @@ public abstract class Health : IHealable, IDamageable
         }
     }
 
-    protected void CheckDead()
+    private void CheckDead()
     {
         if(_currHealth<=0)
         {

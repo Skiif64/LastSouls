@@ -7,10 +7,8 @@ using UnityEngine;
 /// </summary>
 [System.Serializable]
 public abstract class Weapon
-{
-    [SerializeField]
-    protected float _damage;
-    [SerializeField]
+{    
+    protected float _damage;    
     protected DamageType _type;
 
     public virtual void SetWeapon(float damage, DamageType type)
