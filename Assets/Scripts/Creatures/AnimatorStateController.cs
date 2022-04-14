@@ -42,6 +42,9 @@ public class AnimatorStateController : MonoBehaviour
             case State.Attacking:
                 _animator.SetTrigger("Attack");
                 break;
+            case State.Dead:
+                _animator.SetTrigger("Dead");
+                break;
         }
     }
 

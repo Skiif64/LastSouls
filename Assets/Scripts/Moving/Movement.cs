@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,8 @@ public class Movement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _state = GetComponent<CharacterState>();
-    }
+        _state.StateChanged += CheckState;
+    }    
 
     private void FixedUpdate()
     {
@@ -74,5 +76,11 @@ public class Movement : MonoBehaviour
             dir = new Vector2(direction * _moveSpeed*_inAirSpeedMult, _rb.velocity.y);
         }
         _rb.velocity = dir;
+    }
+
+    private void CheckState(object sender, State e)
+    {
+        if (e != State.Dead) return;
+        _canMove = false;
     }
 }
