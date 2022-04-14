@@ -26,7 +26,6 @@ public class Health
     {
         if (!_canTakeDamage) return;
         if (damage.Value < 0) throw new ArgumentException("Damage value below 0",nameof(damage.Value));
-        Debug.Log($"Takes {damage.Value} {damage.Type.Name} from {damage.Sender}");
         _currHealth -= damage.Value;
         if(_currHealth<0)
         {

@@ -8,7 +8,9 @@ public class Character : MonoBehaviour, IDamageable
 {
     [SerializeField] private Health _health;
     [SerializeField] private float _maxHealth; //To remove
+    //TODO: Stats
 
+    //TODO: Resistance
     private CharacterState _state;
     public float CurrentHealth => _health.CurrentHealth;
 
@@ -19,13 +21,15 @@ public class Character : MonoBehaviour, IDamageable
     {
         _health = new Health(_maxHealth);
         _state = GetComponent<CharacterState>();
-        _health.Dying += OnDeath;
+        _health.Dying += OnDeath;//TODO: Реализовать отписку
     }   
 
     public void TakeDamage(DamageInfo damage)
     {
+        //TODO: Просчет сопротивлений
         _health.TakeDamage(damage);        
         HealthChanged?.Invoke(this, CurrentHealth);
+        Debug.Log($"{transform.name} takes {damage.Value} {damage.Type.Name} from {damage.Sender}");
     }
 
     private void OnDeath(object sender, EventArgs e)

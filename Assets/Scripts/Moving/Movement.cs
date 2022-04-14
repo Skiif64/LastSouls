@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _state = GetComponent<CharacterState>();
-        _state.StateChanged += CheckState;
+        _state.StateChanged += CheckState;//TODO: Реализовать отписку
     }    
 
     private void FixedUpdate()
