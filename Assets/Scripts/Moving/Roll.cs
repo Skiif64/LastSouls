@@ -30,6 +30,6 @@ public class Roll : MonoBehaviour
     private void DoRoll(float direction)
     {
         _state.ChangeState(State.Rolling);
-        _rb.AddForce(new Vector2( Mathf.Ceil(direction)*_movement.MoveSpeed*_rollMult, transform.position.y));
+        _rb.AddForce(new Vector2( (float)_state.Facing*_movement.MoveSpeed*_rollMult, transform.position.y));
     }
 }
