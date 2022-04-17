@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Resistance", menuName = "Data/Damage/Resistance")]
-public class Resistance : ScriptableObject
+[System.Serializable]
+public class Resistance
 {
     [SerializeField] private ResistanceType _type;
     [SerializeField] private float _baseValue;

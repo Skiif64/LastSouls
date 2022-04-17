@@ -8,11 +8,10 @@ public class Character : MonoBehaviour, IDamageable
 {
     #region Для теста
     [SerializeField] private float _maxHealth; //To remove
-    [SerializeField] private ResistanceSheet _resistanceSheet;
+    [SerializeField] private ResistanceSheet _resistance;
     #endregion
     #region Внутрение параметры
-    private Health _health;
-    private ResistanceSheetProvider _resistance;
+    private Health _health;    
     private bool _canTakeDamage = true;
     //TODO: Stats
     //TODO: Resistance
@@ -24,8 +23,7 @@ public class Character : MonoBehaviour, IDamageable
     private void Awake()
     {
         #region Инициализация внутренних компонентов
-        _health = new Health(_maxHealth);
-        _resistance = new ResistanceSheetProvider(_resistanceSheet);
+        _health = new Health(_maxHealth);       
         #endregion
         #region Получение компонентов
         _state = GetComponent<CharacterState>();

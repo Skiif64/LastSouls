@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: DummyResistances
   m_EditorClassIdentifier: 
   _resistances:
-  - {fileID: 11400000, guid: 484907642ecfe7347aee6ad4c2841ce7, type: 2}
+  - _type: {fileID: 11400000, guid: b6bde5ab31cf0f84cb5a0d0c92ca6cdc, type: 2}
+    _baseValue: 15
