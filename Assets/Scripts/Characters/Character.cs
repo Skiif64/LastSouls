@@ -19,7 +19,7 @@ public class Character : MonoBehaviour, IDamageable
     #endregion
     public float CurrentHealth => _health.CurrentHealth;
 
-    public event EventHandler<float> HealthChanged;
+    public event EventHandler<DamageInfo> TakenDamage;
     private void Awake()
     {
         #region Инициализация внутренних компонентов
@@ -50,8 +50,8 @@ public class Character : MonoBehaviour, IDamageable
         #endregion
 
         _health.TakeDamage(damageToApply);
-        HealthChanged?.Invoke(this, CurrentHealth);
-        Debug.Log($"{transform.name} takes {damageToApply.Value}({damageToApply.Value - damage.Value}) {damage.Type.Name} from {damage.Sender}");
+        TakenDamage?.Invoke(this, damageToApply);
+        Debug.Log($"{transform.name} takes {damageToApply.Value}({damageToApply.Value - damage.Value}) {damage.Type.Name} damage from {damage.Sender}");
     }
 
     private void OnDeath(object sender, EventArgs e)

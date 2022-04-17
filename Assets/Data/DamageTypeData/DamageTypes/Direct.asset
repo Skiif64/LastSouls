@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdaa63d4a9d71b4c8097817e75c8da1, type: 3}
-  m_Name: SlashResistance
+  m_Script: {fileID: 11500000, guid: ec93cc08d92911d4f90af79217d6ae4e, type: 3}
+  m_Name: Direct
   m_EditorClassIdentifier: 
-  _name: Resist to Slash
-  _icon: {fileID: 0}
+  _name: Direct
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _resistanceType: {fileID: 0}
