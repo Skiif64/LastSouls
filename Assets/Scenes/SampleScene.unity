@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _resistanceSheet: {fileID: 11400000, guid: 8301714c447ad5342b1c1cf315b3762b, type: 2}
+  _resistance: {fileID: 11400000, guid: 8301714c447ad5342b1c1cf315b3762b, type: 2}
 --- !u!114 &1420211838
 MonoBehaviour:
   m_ObjectHideFlags: 0

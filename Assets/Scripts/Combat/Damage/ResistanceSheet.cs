@@ -10,8 +10,14 @@ public class ResistanceSheet : ScriptableObject
 
     public float GetResistanceValue(ResistanceType type)
     {
-        float res = 0;
-        res = _resistances.Find(x => x.Type==type).BaseValue;
-        return res;
+        try
+        {
+            var res = _resistances.Find(x => x.Type == type).BaseValue;
+            return res;
+        }
+        catch
+        {
+            return 0f;
+        }
     }
 }

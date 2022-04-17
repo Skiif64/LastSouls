@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistances:
   - _type: {fileID: 11400000, guid: b6bde5ab31cf0f84cb5a0d0c92ca6cdc, type: 2}
-    _baseValue: 15
+    _baseValue: 10
