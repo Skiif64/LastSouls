@@ -44,7 +44,7 @@ public class Character : MonoBehaviour, IDamageable
         var damageToApply = new DamageInfo
             (
             damage.Sender,
-            damage.Value * (1 - resist/100f),
+            Mathf.Max(Mathf.Ceil(damage.Value * (1 - resist/100f)),1f),
             damage.Type
             );        
         #endregion

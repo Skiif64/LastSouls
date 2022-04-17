@@ -21,7 +21,7 @@ public class Health
     /// <param name="damage">Информация об уроне</param>
     public void TakeDamage(DamageInfo damage)
     {        
-        if (damage.Value < 0) throw new ArgumentException("Damage value below 0",nameof(damage.Value));
+        if (damage.Value < 1) throw new ArgumentException("Damage value below 1",nameof(damage.Value));
         _currHealth -= damage.Value;
         if(_currHealth<0)
         {
