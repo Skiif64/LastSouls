@@ -76,6 +76,7 @@ public class Movement : MonoBehaviour
             dir = new Vector2(direction * _moveSpeed*_inAirSpeedMult, _rb.velocity.y);
         }
         _rb.velocity = dir;
+        dir = Vector2.zero;
     }
 
     private void CheckState(object sender, State e)

@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharaterType
+{
+    NPC,
+    Player,    
+    Enemy
+}
+
 [RequireComponent(typeof(CharacterState))]
 public class Character : MonoBehaviour, IDamageable
 {
@@ -10,6 +17,7 @@ public class Character : MonoBehaviour, IDamageable
     [SerializeField] private float _maxHealth; //To remove
     [SerializeField] private ResistanceSheet _resistance;
     #endregion
+    [SerializeField] private CharaterType _characterType;
     #region Внутрение параметры
     private Health _health;    
     private bool _canTakeDamage = true;
@@ -18,6 +26,7 @@ public class Character : MonoBehaviour, IDamageable
     private CharacterState _state;
     #endregion
     public float CurrentHealth => _health.CurrentHealth;
+    public CharaterType CharaterType => _characterType;
 
     public event EventHandler<DamageInfo> TakenDamage;
     private void Awake()
