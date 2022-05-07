@@ -67,6 +67,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         _state.ChangeState(State.Dead);
         _canTakeDamage = false;
+        if (_characterType == CharaterType.Player) return;
         Destroy(gameObject, 3f);
     }
 

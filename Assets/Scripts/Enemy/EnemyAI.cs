@@ -30,7 +30,11 @@ public class EnemyAI : MonoBehaviour
 
         if (!_target) _target = TryGetTarget();
         if (!_target) return;
-
+        if (_target.CurrentHealth == 0)
+        {
+            _target = null;
+            return;
+        }
         if (Vector2.Distance(transform.position, _target.transform.position) > _attackDistance)
         {
             Move();
