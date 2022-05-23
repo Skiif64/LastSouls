@@ -19,10 +19,11 @@ public class Roll : MonoBehaviour
         _movement = GetComponent<Movement>();
         _state = GetComponent<CharacterState>();
     }
+     
 
     public void TryRoll(float direction)
     {
-        if(_canRoll && _movement.IsGrounded && Mathf.Abs(direction)>0.1f)
+        if(_canRoll && _movement.IsGrounded && _movement.CanMove && Mathf.Abs(direction)>0.1f)
         {
             DoRoll(direction);
         }
@@ -31,5 +32,5 @@ public class Roll : MonoBehaviour
     {
         _state.ChangeState(State.Rolling);
         _rb.AddForce(new Vector2( (float)_state.Facing*_movement.MoveSpeed*_rollMult, transform.position.y));
-    }
+    }    
 }

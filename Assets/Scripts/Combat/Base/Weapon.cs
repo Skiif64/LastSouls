@@ -11,10 +11,11 @@ public abstract class Weapon
     protected float _damage;    
     protected DamageType _type;
 
-    public virtual void SetWeapon(float damage, DamageType type)
+    public virtual void SetWeapon(WeaponItem item)
     {
-        _damage = damage;
-        _type = type;
+        var info = item.GetDamageInfo();
+        _damage = info.Value;
+        _type = info.Type;
     }
 
     public abstract void Attack(Collider2D target);

@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb96b57a0725d314a991ec4e4d465d8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: {fileID: 11400000, guid: d6afe7341f1c4a34ba5bd0ccfd8700f6, type: 2}
+  _weaponItem: {fileID: 11400000, guid: 30e70da098034004dbf591a17b70db3f, type: 2}
   _distance: 1.35
   _hOffset: 0.6
   _vOffset: 1

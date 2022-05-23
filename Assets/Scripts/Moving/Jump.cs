@@ -15,6 +15,7 @@ public class Jump : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _movement = GetComponent<Movement>();
     }
+    
 
     private void Update()
     {
@@ -23,6 +24,8 @@ public class Jump : MonoBehaviour
 
     public void TryJump()
     {
+        if (!_movement.CanMove) return;
+
         if (_movement.IsGrounded)
         {
             DoJump();
@@ -38,5 +41,5 @@ public class Jump : MonoBehaviour
     {
         _animator.SetTrigger("jump");
         _rb.AddForce(Vector2.up * _jumpForce);
-    }
+    }    
 }

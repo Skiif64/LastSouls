@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
 
     public bool IsGrounded => _isGrounded;
     public float MoveSpeed => _moveSpeed;
+    public bool CanMove => _canMove;
 
     private void Awake()
     {

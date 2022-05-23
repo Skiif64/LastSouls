@@ -5,13 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterState))]
 public class Combat : MonoBehaviour
 {
-    #region Тестовые данные
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private DamageType _type;
-    [SerializeField] private float _distance;
-    #endregion
+    [SerializeField] private WeaponItem _weaponItem;
 
     #region Настройки
+    [SerializeField] private float _distance;
     [SerializeField] private float _hOffset;
     [SerializeField] private float _vOffset;
     #endregion
@@ -29,7 +27,7 @@ public class Combat : MonoBehaviour
         #endregion
         #region Инициализация компонентов
         _weapon = new MeleeWeapon();
-        _weapon.SetWeapon(10, _type);
+        _weapon.SetWeapon(_weaponItem);
         #endregion
     }
 
