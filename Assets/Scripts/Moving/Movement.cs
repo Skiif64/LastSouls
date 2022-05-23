@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D),typeof(CharacterState))]
 public class Movement : MonoBehaviour
 {
     #region Параметры    
@@ -13,12 +14,12 @@ public class Movement : MonoBehaviour
     #endregion
     #region Внутрение параметры
     private bool _canMove = true;
-    private bool _isGrounded;
-    private bool _isDirectionRight = true;
-    private Rigidbody2D _rb;    
+    private bool _isGrounded;    
+    private Rigidbody2D _rb;
+    private CharacterState _state;
     #endregion
     #region Ссылки
-    [SerializeField] private SpriteRenderer _playerRender;
+    
     [SerializeField] private Animator _animator;
     #endregion
 
@@ -28,19 +29,23 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-    }
+        _state = GetComponent<CharacterState>();
+        _state.StateChanged += CheckState;//TODO: Реализовать отписку
+    }    
 
     private void FixedUpdate()
     {
         _isGrounded = CheckGround();
     }
 
-    public bool CheckGround()
+    private bool CheckGround()
     {
         if (Physics2D.Raycast(transform.position, Vector2.down, _groundCheckDistance))
         {
+            _state.ChangeState(State.Still);
             return true;
         }
+        _state.ChangeState(State.InAir);
         return false;
     }
     public void Move(float direction)
@@ -53,14 +58,14 @@ public class Movement : MonoBehaviour
         if (Mathf.Abs(direction) < 0.01) return;
         if (direction > 0)
         {
-            _isDirectionRight = true;
+            _state.ChangeFacing(Facing.Right);
         }
         else
         {
-            _isDirectionRight = false;
+            _state.ChangeFacing(Facing.Left);
         }
 
-        _playerRender.flipX = !_isDirectionRight;
+        
         Vector2 dir;
         if(_isGrounded)
         {
@@ -71,5 +76,12 @@ public class Movement : MonoBehaviour
             dir = new Vector2(direction * _moveSpeed*_inAirSpeedMult, _rb.velocity.y);
         }
         _rb.velocity = dir;
+        dir = Vector2.zero;
+    }
+
+    private void CheckState(object sender, State e)
+    {
+        if (e != State.Dead) return;
+        _canMove = false;
     }
 }

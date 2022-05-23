@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
-{
-    [SerializeField] private float _verticalOffset = 1f;
-    [SerializeField] private float _horizontalBounds = 2f;
-    [SerializeField] private float _verticalBounds = 1f;
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _distance = 10f;
+{    
     [SerializeField] private Transform _target;
+    [SerializeField] private float _boundX = 0.15f;
+    [SerializeField] private float _boundY = 0.1f;
+    [SerializeField] private float _verticalOffset = 0.1f;
     private Transform _transform;
 
     private void Awake()
@@ -17,12 +15,10 @@ public class CameraFollow : MonoBehaviour
         _transform = transform;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        float posX = Mathf.Clamp(Mathf.Lerp(_transform.position.x, _target.position.x, Time.fixedDeltaTime * _speed),
-            _transform.position.x - _horizontalBounds, _transform.position.x + _horizontalBounds);
-        float posY = Mathf.Clamp(Mathf.Lerp(_transform.position.y, _target.position.y, Time.fixedDeltaTime * _speed),
-            _transform.position.y - _verticalBounds, _transform.position.y + _verticalBounds);
-        _transform.position = new Vector3(posX,posY+_verticalOffset,-_distance);
+        var deltaX = Mathf.Clamp(_target.position.x - _transform.position.x, -_boundX, _boundX);
+        var deltaY = Mathf.Clamp(_target.position.y + _verticalOffset - _transform.position.y, -_boundY, _boundY);
+        _transform.Translate(deltaX, deltaY, 0);
     }
 }
