@@ -8,9 +8,9 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     #region Параметры    
-    [SerializeField] private float _moveSpeed = 1f;
+    [SerializeField] private float _moveSpeed = 6f;
     [SerializeField] private float _inAirSpeedMult = 0.8f;
-    [SerializeField] private float _groundCheckDistance;
+    [SerializeField] private float _groundCheckDistance = 0.001f;
     #endregion
     #region Внутрение параметры
     private bool _canMove = true;
